@@ -1,0 +1,1 @@
+{"adapter": "n64wasm", "labels": {"A": "GAS", "B": "BRAKE", "Z": "LEAN", "R": "LEAN", "CU": "VIEW"}, "hide": ["L"], "hint": "Drag the left side to steer"}

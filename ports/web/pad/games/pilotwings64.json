@@ -1,0 +1,1 @@
+{"adapter": "gamepad", "waitFor": "#overlay", "canvas": "#stage", "float": true}

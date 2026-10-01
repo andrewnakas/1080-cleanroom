@@ -1,0 +1,1 @@
+{"adapter": "mask", "sink": "module", "waitFor": "#start", "labels": {"A": "GAS", "B": "BRAKE", "Z": "ITEM", "R": "HOP"}, "hint": "Drag the left side to steer"}

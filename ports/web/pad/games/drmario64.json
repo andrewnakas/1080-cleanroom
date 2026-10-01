@@ -1,0 +1,1 @@
+{"adapter": "ejs", "canvas": "#wrap", "float": true, "css": "#bar { display:none !important; } #wrap { height:auto; }"}

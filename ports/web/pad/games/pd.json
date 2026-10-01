@@ -1,0 +1,7 @@
+{"adapter": "keys", "waitFor": "#start",
+ "keys": {"up": "KeyW", "down": "KeyS", "left": "KeyA", "right": "KeyD",
+          "CU": "ArrowUp", "CD": "ArrowDown", "CL": "ArrowLeft", "CR": "ArrowRight",
+          "DU": "ArrowUp", "DD": "ArrowDown", "DL": "ArrowLeft", "DR": "ArrowRight",
+          "Z": "Space", "R": "KeyZ", "A": ["KeyE", "Enter"], "B": "KeyR", "L": "KeyQ", "Start": "Tab"},
+ "labels": {"Z": "FIRE", "R": "AIM", "A": "USE", "B": "RELOAD", "L": "WEAPON", "CU": "LOOK"},
+ "hint": "Left side moves · C buttons look"}

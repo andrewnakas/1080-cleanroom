@@ -1,0 +1,1 @@
+{"adapter": "n64wasm", "labels": {"A": "FIRE", "B": "BOMB", "Z": "TILT", "R": "TILT", "CL": "BOOST", "CD": "BRAKE", "CU": "VIEW"}, "hide": ["L"], "hint": "Drag the left side to steer · Z/R twice = barrel roll"}
