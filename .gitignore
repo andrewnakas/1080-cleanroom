@@ -5,3 +5,7 @@ __pycache__/
 *.v64
 *.zip
 baserom*
+spec_dirty/
+*.pkl
+start.cmd
+games/dk64/voices/_raw/
