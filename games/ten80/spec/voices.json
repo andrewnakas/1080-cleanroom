@@ -1,0 +1,857 @@
+{
+"4:0": {
+"text": "Oh, yes!",
+"who": "rider4",
+"secs": 1.77
+},
+"4:1D10": {
+"text": "Oh no!",
+"who": "rider4",
+"secs": 2.35
+},
+"4:6280": {
+"text": "Ow!",
+"who": "rider4",
+"secs": 0.65
+},
+"4:6D30": {
+"text": "Mm-hmm",
+"who": "rider4",
+"secs": 0.66
+},
+"4:7810": {
+"text": "Out!",
+"who": "rider4",
+"secs": 0.71
+},
+"4:8A30": {
+"text": "Ha!",
+"who": "rider4",
+"secs": 0.47
+},
+"4:91F0": {
+"text": "Oh!",
+"who": "rider4",
+"secs": 0.51
+},
+"4:C590": {
+"text": "Man!",
+"who": "rider4",
+"secs": 0.77
+},
+"4:D240": {
+"text": "Ow!",
+"who": "rider4",
+"secs": 0.71
+},
+"4:DDF0": {
+"text": "Oh.",
+"who": "rider4",
+"secs": 0.58
+},
+"4:E780": {
+"text": "Ow!",
+"who": "rider4",
+"secs": 0.82
+},
+"4:10650": {
+"text": "Hey!",
+"who": "rider4",
+"secs": 0.54
+},
+"4:10F40": {
+"text": "Whoop.",
+"who": "rider4",
+"secs": 0.66
+},
+"4:11A20": {
+"text": "See you, little man.",
+"who": "rider4",
+"secs": 1.07
+},
+"4:12BB0": {
+"text": "Get ready.",
+"who": "rider4",
+"secs": 0.83
+},
+"4:13960": {
+"text": "Yahoo!",
+"who": "rider4",
+"secs": 1.08
+},
+"4:14B20": {
+"text": "Meh.",
+"who": "rider4",
+"secs": 0.52
+},
+"4:153A0": {
+"text": "I love you, man.",
+"who": "rider4",
+"secs": 0.93
+},
+"5:0": {
+"text": "Yes!",
+"who": "rider5",
+"secs": 0.8
+},
+"5:9000": {
+"text": "Hey!",
+"who": "rider5",
+"secs": 0.97
+},
+"5:A0D0": {
+"text": "What was that?",
+"who": "rider5",
+"secs": 1.24
+},
+"5:F300": {
+"text": "Yes!",
+"who": "rider5",
+"secs": 0.72
+},
+"5:10420": {
+"text": "Why?",
+"who": "rider5",
+"secs": 0.69
+},
+"5:11040": {
+"text": "Yahoo!",
+"who": "rider5",
+"secs": 3.57
+},
+"6:0": {
+"text": "Yes!",
+"who": "rider6",
+"secs": 0.53
+},
+"6:B00": {
+"text": "Come on!",
+"who": "rider6",
+"secs": 0.69
+},
+"6:3720": {
+"text": "What the-",
+"who": "rider6",
+"secs": 0.46
+},
+"6:47F0": {
+"text": "Yeah!",
+"who": "rider6",
+"secs": 0.56
+},
+"6:5390": {
+"text": "Yeah!",
+"who": "rider6",
+"secs": 0.47
+},
+"6:6360": {
+"text": "Yeah!",
+"who": "rider6",
+"secs": 0.7
+},
+"6:7410": {
+"text": "Yeah!",
+"who": "rider6",
+"secs": 0.63
+},
+"6:B2C0": {
+"text": "Bye-bye!",
+"who": "rider6",
+"secs": 0.68
+},
+"6:C640": {
+"text": "Yes?",
+"who": "rider6",
+"secs": 0.54
+},
+"6:D180": {
+"text": "Huh",
+"who": "rider6",
+"secs": 0.66
+},
+"6:F4A0": {
+"text": "Yeah!",
+"who": "rider6",
+"secs": 1.41
+},
+"6:111E0": {
+"text": "Huh",
+"who": "rider6",
+"secs": 0.66
+},
+"7:2530": {
+"text": "Whoa!",
+"who": "rider7",
+"secs": 0.8
+},
+"7:43F0": {
+"text": "Ah!",
+"who": "rider7",
+"secs": 0.46
+},
+"7:4D80": {
+"text": "Ah!",
+"who": "rider7",
+"secs": 0.5
+},
+"7:57E0": {
+"text": "Woah, look out!",
+"who": "rider7",
+"secs": 1.49
+},
+"7:8F10": {
+"text": "Hey!",
+"who": "rider7",
+"secs": 0.48
+},
+"7:98F0": {
+"text": "Hey dude!",
+"who": "rider7",
+"secs": 0.5
+},
+"7:A350": {
+"text": "Yo!",
+"who": "rider7",
+"secs": 0.5
+},
+"7:ADC0": {
+"text": "Oh yeah!",
+"who": "rider7",
+"secs": 0.62
+},
+"7:BA90": {
+"text": "Oh, no way!",
+"who": "rider7",
+"secs": 0.94
+},
+"7:CE10": {
+"text": "Hey, watch it!",
+"who": "rider7",
+"secs": 0.59
+},
+"7:DA40": {
+"text": "Wahoo!",
+"who": "rider7",
+"secs": 1.27
+},
+"7:F480": {
+"text": "Hah!",
+"who": "rider7",
+"secs": 0.45
+},
+"8:30D0": {
+"text": "Yeah!",
+"who": "rider8",
+"secs": 0.52
+},
+"8:3B10": {
+"text": "Oh!",
+"who": "rider8",
+"secs": 0.6
+},
+"8:5EC0": {
+"text": "Oh!",
+"who": "rider8",
+"secs": 0.73
+},
+"8:6D00": {
+"text": "Oh!",
+"who": "rider8",
+"secs": 0.93
+},
+"8:7F30": {
+"text": "Oh, oh!",
+"who": "rider8",
+"secs": 1.41
+},
+"8:9AB0": {
+"text": "Yeah!",
+"who": "rider8",
+"secs": 0.96
+},
+"8:AB80": {
+"text": "Wow!",
+"who": "rider8",
+"secs": 0.59
+},
+"8:C350": {
+"text": "Hey!",
+"who": "rider8",
+"secs": 0.58
+},
+"8:CEB0": {
+"text": "Hey!",
+"who": "rider8",
+"secs": 0.73
+},
+"8:E3D0": {
+"text": "All right.",
+"who": "rider8",
+"secs": 1.09
+},
+"8:10F50": {
+"text": "get outta here!",
+"who": "rider8",
+"secs": 0.81
+},
+"8:11F40": {
+"text": "Wahoo!",
+"who": "rider8",
+"secs": 1.83
+},
+"8:14300": {
+"text": "Ugh.",
+"who": "rider8",
+"secs": 0.57
+},
+"9:0": {
+"text": "Ahhh",
+"who": "rider9",
+"secs": 0.53
+},
+"9:1580": {
+"text": "Whoa!",
+"who": "rider9",
+"secs": 0.59
+},
+"9:37D0": {
+"text": "Bye-bye!",
+"who": "rider9",
+"secs": 0.46
+},
+"10:0": {
+"text": "Go!",
+"who": "announcer",
+"secs": 1.53
+},
+"10:32A0": {
+"text": "Finish!",
+"who": "announcer",
+"secs": 1.58
+},
+"10:66F0": {
+"text": "You did it!",
+"who": "announcer",
+"secs": 1.23
+},
+"10:8FD0": {
+"text": "Oh, it's a new record!",
+"who": "announcer",
+"secs": 2.23
+},
+"10:DE40": {
+"text": "Finish!",
+"who": "announcer",
+"secs": 0.88
+},
+"10:FD50": {
+"text": "Nice try!",
+"who": "announcer",
+"secs": 1.16
+},
+"10:12630": {
+"text": "Too Bad!",
+"who": "announcer",
+"secs": 1.39
+},
+"10:15740": {
+"text": "Time out!",
+"who": "announcer",
+"secs": 1.49
+},
+"10:1F0D0": {
+"text": "Match Race!",
+"who": "announcer",
+"secs": 1.16
+},
+"10:219B0": {
+"text": "Time Attack!",
+"who": "announcer",
+"secs": 1.07
+},
+"10:23F50": {
+"text": "Trick Attack!",
+"who": "announcer",
+"secs": 1.16
+},
+"10:26830": {
+"text": "Contest!",
+"who": "announcer",
+"secs": 1.16
+},
+"10:29110": {
+"text": "Two players!",
+"who": "announcer",
+"secs": 1.16
+},
+"10:2B9F0": {
+"text": "Training!",
+"who": "announcer",
+"secs": 0.88
+},
+"10:2D900": {
+"text": "Options",
+"who": "announcer",
+"secs": 1.02
+},
+"10:2FCF0": {
+"text": "Alright, man!",
+"who": "announcer",
+"secs": 0.89
+},
+"10:31760": {
+"text": "Yes!",
+"who": "announcer",
+"secs": 0.52
+},
+"10:327A0": {
+"text": "Okay!",
+"who": "announcer",
+"secs": 0.57
+},
+"10:33E40": {
+"text": "Sure I did!",
+"who": "announcer",
+"secs": 0.84
+},
+"10:35BB0": {
+"text": "Let's go!",
+"who": "announcer",
+"secs": 0.69
+},
+"10:37400": {
+"text": "Yo!",
+"who": "announcer",
+"secs": 0.47
+},
+"10:38200": {
+"text": "Hm?",
+"who": "announcer",
+"secs": 0.52
+},
+"10:39260": {
+"text": "Hi!",
+"who": "announcer",
+"secs": 0.7
+},
+"10:3CCA0": {
+"text": "Okay.",
+"who": "announcer",
+"secs": 0.83
+},
+"10:3F6E0": {
+"text": "Too Bad",
+"who": "announcer",
+"secs": 0.65
+},
+"10:40DD0": {
+"text": "Well, fine then.",
+"who": "announcer",
+"secs": 1.0
+},
+"10:43130": {
+"text": "Oh no!",
+"who": "announcer",
+"secs": 2.35
+},
+"10:4CDB0": {
+"text": "Oh no way!",
+"who": "announcer",
+"secs": 0.96
+},
+"10:4F170": {
+"text": "Ah, jeez!",
+"who": "announcer",
+"secs": 1.36
+},
+"10:52740": {
+"text": "Ready?",
+"who": "announcer",
+"secs": 1.08
+},
+"10:54B30": {
+"text": "Go!",
+"who": "announcer",
+"secs": 0.74
+},
+"10:590C0": {
+"text": "Half Pipe",
+"who": "announcer",
+"secs": 0.98
+},
+"10:5C000": {
+"text": "Crystal Lake",
+"who": "announcer",
+"secs": 1.23
+},
+"10:5FBA0": {
+"text": "Crystal Peak",
+"who": "announcer",
+"secs": 1.21
+},
+"10:63620": {
+"text": "Golden Forest.",
+"who": "announcer",
+"secs": 1.25
+},
+"10:672E0": {
+"text": "Mountain Village",
+"who": "announcer",
+"secs": 1.39
+},
+"10:6B660": {
+"text": "Dragon Cave.",
+"who": "announcer",
+"secs": 1.21
+},
+"10:6F0E0": {
+"text": "Deadly fall.",
+"who": "announcer",
+"secs": 1.16
+},
+"10:72920": {
+"text": "Welcome!",
+"who": "announcer",
+"secs": 0.83
+},
+"10:74830": {
+"text": "Check.",
+"who": "announcer",
+"secs": 0.65
+},
+"10:75F20": {
+"text": "Testing.",
+"who": "announcer",
+"secs": 0.93
+},
+"10:77FD0": {
+"text": "Left.",
+"who": "announcer",
+"secs": 0.6
+},
+"10:79510": {
+"text": "Right.",
+"who": "announcer",
+"secs": 0.6
+},
+"10:7AA50": {
+"text": "Center",
+"who": "announcer",
+"secs": 0.7
+},
+"10:7C2E0": {
+"text": "Are you sure?",
+"who": "announcer",
+"secs": 1.02
+},
+"10:85160": {
+"text": "Later, dude!",
+"who": "announcer",
+"secs": 0.92
+},
+"10:871E0": {
+"text": "Ooh, sucker!",
+"who": "announcer",
+"secs": 0.88
+},
+"10:890F0": {
+"text": "Sweet!",
+"who": "announcer",
+"secs": 0.55
+},
+"10:8A430": {
+"text": "You did a good job!",
+"who": "announcer",
+"secs": 1.53
+},
+"10:91000": {
+"text": "Thanks for playing.",
+"who": "announcer",
+"secs": 1.21
+},
+"11:0": {
+"text": "Time Extension",
+"who": "announcer",
+"secs": 1.18
+},
+"11:2740": {
+"text": "Just made it.",
+"who": "announcer",
+"secs": 1.23
+},
+"11:5020": {
+"text": "Hurry up!",
+"who": "announcer",
+"secs": 0.84
+},
+"11:6BF0": {
+"text": "Dion Blaster.",
+"who": "announcer",
+"secs": 1.45
+},
+"11:AE50": {
+"text": "Kensuke Kimachi!",
+"who": "announcer",
+"secs": 1.62
+},
+"11:13790": {
+"text": "Ricky Winterborn!",
+"who": "announcer",
+"secs": 1.38
+},
+"11:17690": {
+"text": "Rob Haywood!",
+"who": "announcer",
+"secs": 1.18
+},
+"11:1AC90": {
+"text": "Dion Blaster!",
+"who": "announcer",
+"secs": 2.16
+},
+"11:20F90": {
+"text": "Kensuke Kimachi!",
+"who": "announcer",
+"secs": 2.41
+},
+"11:27DD0": {
+"text": "Akari Hayami!",
+"who": "announcer",
+"secs": 2.36
+},
+"11:2E9D0": {
+"text": "Ricky Winterborn!",
+"who": "announcer",
+"secs": 2.46
+},
+"11:35A50": {
+"text": "Rob Haywood!",
+"who": "announcer",
+"secs": 1.82
+},
+"11:3AD90": {
+"text": "Versus!",
+"who": "announcer",
+"secs": 0.76
+},
+"11:3D030": {
+"text": "Melancholy.",
+"who": "announcer",
+"secs": 1.08
+},
+"11:401B0": {
+"text": "Lien Air!",
+"who": "announcer",
+"secs": 1.03
+},
+"11:430F0": {
+"text": "Method!",
+"who": "announcer",
+"secs": 0.71
+},
+"11:45190": {
+"text": "Shifty!",
+"who": "announcer",
+"secs": 0.79
+},
+"11:4B910": {
+"text": "Nose Grab!",
+"who": "announcer",
+"secs": 1.08
+},
+"11:4EA90": {
+"text": "Tail Grab!",
+"who": "announcer",
+"secs": 0.98
+},
+"11:54910": {
+"text": "Mute grab!",
+"who": "announcer",
+"secs": 0.93
+},
+"11:5B090": {
+"text": "Indie Nose Bone",
+"who": "announcer",
+"secs": 1.33
+},
+"11:843D0": {
+"text": "Front Flip!",
+"who": "announcer",
+"secs": 0.98
+},
+"11:870D0": {
+"text": "Backflip!",
+"who": "announcer",
+"secs": 1.03
+},
+"11:8E390": {
+"text": "One Foot!",
+"who": "announcer",
+"secs": 0.93
+},
+"12:42200": {
+"text": "I like that bass.",
+"who": "vocals",
+"secs": 1.48
+},
+"12:489C0": {
+"text": "There goes the boom!",
+"who": "vocals",
+"secs": 1.39
+},
+"12:4EBA0": {
+"text": "Rock me, baby!",
+"who": "vocals",
+"secs": 1.2
+},
+"12:67280": {
+"text": "Okay, now.",
+"who": "vocals",
+"secs": 1.12
+},
+"12:6C120": {
+"text": "dances herself to death.",
+"who": "vocals",
+"secs": 1.64
+},
+"12:B8980": {
+"text": "Give it to me.",
+"who": "vocals",
+"secs": 0.77
+},
+"12:BBF80": {
+"text": "Good.",
+"who": "vocals",
+"secs": 0.79
+},
+"12:BF740": {
+"text": "Ahh",
+"who": "vocals",
+"secs": 0.55
+},
+"12:C1DC0": {
+"text": "I don't need your bad love, baby",
+"who": "vocals",
+"secs": 1.66
+},
+"12:D7510": {
+"text": "Wow!",
+"who": "vocals",
+"secs": 0.46
+},
+"12:E7CB0": {
+"text": "Hello.",
+"who": "vocals",
+"secs": 0.66
+},
+"12:E9CC0": {
+"text": "Call me!",
+"who": "vocals",
+"secs": 0.65
+},
+"12:EC050": {
+"text": "Bye!",
+"who": "vocals",
+"secs": 0.54
+},
+"12:EDAB0": {
+"text": "Call toll free now.",
+"who": "vocals",
+"secs": 1.03
+},
+"12:F3950": {
+"text": "And now",
+"who": "vocals",
+"secs": 0.79
+},
+"12:F4E50": {
+"text": "D-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da-da",
+"who": "vocals",
+"secs": 2.93
+},
+"12:F8EC0": {
+"text": "Don't leave me, baby!",
+"who": "vocals",
+"secs": 1.44
+},
+"12:FEF00": {
+"text": "What a cold boy!",
+"who": "vocals",
+"secs": 1.17
+},
+"12:100E00": {
+"text": "Just let your body move!",
+"who": "vocals",
+"secs": 1.53
+},
+"12:13D8C0": {
+"text": "But you're lookin' the lion, don't breathe",
+"who": "vocals",
+"secs": 2.7
+},
+"12:146780": {
+"text": "You let your bell ring, ring out for your...",
+"who": "vocals",
+"secs": 2.35
+},
+"12:152470": {
+"text": "Dies!",
+"who": "vocals",
+"secs": 0.72
+},
+"12:1548F0": {
+"text": "Mind",
+"who": "vocals",
+"secs": 0.82
+},
+"12:15F910": {
+"text": "This is a test.",
+"who": "vocals",
+"secs": 1.23
+},
+"12:1634A0": {
+"text": "This is only a test.",
+"who": "vocals",
+"secs": 1.98
+},
+"12:1689F0": {
+"text": "This station is conducting a test of the emergency broadcast system.",
+"who": "vocals",
+"secs": 4.58
+},
+"12:173A00": {
+"text": "at three minutes after the hour.",
+"who": "vocals",
+"secs": 1.49
+},
+"12:1755D0": {
+"text": "We're gonna build a super race!",
+"who": "vocals",
+"secs": 2.08
+},
+"12:177A60": {
+"text": "returned",
+"who": "vocals",
+"secs": 1.01
+},
+"12:18D920": {
+"text": "Work your body! Work your body!",
+"who": "vocals",
+"secs": 2.12
+},
+"12:1983E0": {
+"text": "Yeah!",
+"who": "vocals",
+"secs": 0.86
+},
+"12:19C070": {
+"text": "Push it in!",
+"who": "vocals",
+"secs": 1.1
+},
+"12:1A0DD0": {
+"text": "Push It Out!",
+"who": "vocals",
+"secs": 1.1
+}
+}

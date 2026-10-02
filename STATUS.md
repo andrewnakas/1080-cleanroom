@@ -25,8 +25,11 @@ Boots, menus readable, a race plays start to finish, audio flows (no dropouts in
   logos and the "© Nintendo" line are replaced by plain "1080 CLEAN ROOM" style cards / "1080" decals.
 - Quantisation dither: random for RGBA16 textures, 4x4 ordered for palette pictures (keeps skies compressible).
   Taint rule for decoded palette pictures is 32 texels (64 bytes), as in the Conker clean room; raw bytes keep 32.
-- Voices: Whisper transcribes the words of the non-looping clips (dirty room, words only) -> Piper placeholder speech in
-  four stock voices picked by the clip's median pitch. No cloning. Takes in `games/ten80/takes/` override TTS.
+- Voices: Whisper (small.en, CPU, offline; the GPU run crashed silently and medium.en stalled on a download) transcribes
+  the words of the non-looping clips (dirty room, words only): 171 of 292 clips have words. Piper placeholder speech, one
+  stock voice per sample bank (banks 4-9 = riders, 10-11 = announcer, 12 = sung phrases in the music). No cloning.
+  Obvious mis-hearings are corrected in `voices.FIX` (names, trick names); two lines recognised as profanity were
+  replaced by guesses ("Later, dude!", "Sweet!"). Takes in `games/ten80/takes/` override TTS.
 
 ## Works
 - Boot -> title -> mode menu -> level / rider / board select -> race -> pause menu, keyboard + gamepad.
@@ -34,6 +37,7 @@ Boots, menus readable, a race plays start to finish, audio flows (no dropouts in
   8 portraits x3 sizes, course banners, button / stick icons, rider face textures with eyes and mouths), rest = kept
   colour grid + alpha outline with our noise.
 - 516 sound samples resynthesised (4-bit and 2-bit VADPCM, our books and loop states), sequences untouched.
+- 171 spoken clips are placeholder TTS (`games/ten80/voices/*.wav`, our own output); practice pack built.
 - `games/ten80/taint.py`: 0 failing, 0 bytes changed outside regenerated regions.
 - `games/ten80/publish.sh`: generate -> taint gate -> site -> push.
 
@@ -46,12 +50,12 @@ Boots, menus readable, a race plays start to finish, audio flows (no dropouts in
 - HUD bottom-left icon is a blurred cube (not yet identified which texture it is).
 
 ## Next
-- Voices in the ROM + practice pack (running).
 - Sharper lodge / course preview pictures (render from the game's own geometry or briefs).
 - Sign textures in `charsps` (difficulty pass cards), helicopter decals, map banners with text.
 
 ## For the morning
 - Play: https://andrewnakas.github.io/1080-cleanroom/ (arrows, X = A, C = B, Z = Z, Enter = Start).
 - Look at: menu text, rider portraits and name plates (select rider), rider faces in game, HUD digits.
-- Record: practice pack in `D:/n64work/1080/practice/` (when listed under Works), then
-  `python -m games.ten80.voices cut <recording.wav> <track>` and `bash games/ten80/publish.sh`.
+- Record: practice pack in `D:/n64work/1080/practice/` (8 tracks: announcer 74 clips, vocals 33, rider4-9; `SCRIPT.txt`
+  lists the words). Then `python -m games.ten80.voices cut <recording.wav> <track>` and `bash games/ten80/publish.sh`.
+- Check the words in `games/ten80/spec/voices.json`: they are speech recognition, some rider shouts will be wrong.

@@ -26,11 +26,41 @@ PIPER_DIR = os.environ.get("PIPER_VOICES", "C:/Users/andre/n64work/piper_voices"
 HZ = 22050
 MIN_S = 0.45
 
-# median pitch of the clip -> (practice track, Piper model, semitones)
-BANDS = [(110, "deep", "en_US-ryan-high", -4.0), (150, "low", "en_US-joe-medium", -2.0),
-         (200, "mid", "en_US-ryan-high", 1.5), (9999, "high", "en_US-amy-medium", 1.0)]
-DEFAULT = ("mid", "en_US-ryan-high", 1.5)
+# one stock voice per sample bank (a bank holds one speaker): track name -> (Piper model, semitones)
+VOICES = {"rider4": ("en_US-ryan-high", -3.0), "rider5": ("en_US-amy-medium", 1.0), "rider6": ("en_US-joe-medium", 4.0),
+          "rider7": ("en_US-joe-medium", 1.5), "rider8": ("en_US-ryan-high", 0.0), "rider9": ("en_US-joe-medium", -2.0),
+          "announcer": ("en_US-ryan-high", 1.5), "vocals": ("en_US-amy-medium", 0.0)}
+# speech recognition slips, corrected by ear-free common sense (mode names are in the menu text)
+FIX = {"Vibish!": "Finish!", "METRACE!": "Match Race!", "TRADING!": "Training!", "2 players.": "Two players!",
+       "Fuck you, dude.": "Later, dude!", "Shit.": "Sweet!", "I- Thi-": "Hey!", "What that that?": "What was that?",
+       "Done now!": "Come on!", "Yada!": "Yeah!", "Hola!": "Whoa!", "testing": "Testing.", "MAN!": "Man!",
+       "Ricky Winterborg": "Ricky Winterborn!", "RICKY WINTERBOARD!": "Ricky Winterborn!", "Rob Heywood!": "Rob Haywood!",
+       "I'm Curry Hayami!": "Akari Hayami!", "LEAD AIR!": "Lien Air!", "FROOD FLIP": "Front Flip!", "method": "Method!",
+       "Shifty": "Shifty!", "tail grab": "Tail Grab!", "versus.": "Versus!", "NOSEGRAB": "Nose Grab!"}
+MIN_BANK = 4                 # banks 0-3 are instruments and effects (recognition there is noise)
 _V = {}
+
+
+def track(key):
+    b = int(key.split(":")[0])
+    return "rider%d" % b if b < 10 else ("announcer" if b < 12 else "vocals")      # bank 12: sung phrases in the music
+
+
+def band(who):
+    m, st = VOICES.get(who, VOICES["announcer"])
+    return who, m, st
+
+
+def tidy(key, text):
+    """-> cleaned words, or None when the clip is not speech."""
+    if int(key.split(":")[0]) < MIN_BANK:
+        return None
+    text = FIX.get(text, text)
+    if text.isupper() and len(text) > 5 and " " not in text and text.rstrip("!") not in ("OPTIONS", "WELCOME"):
+        return None                                   # "CHEERING", "MMMMMMMM": sound tags
+    if text.isupper():
+        text = text.title()
+    return text
 
 
 def fname(key):
@@ -39,14 +69,6 @@ def fname(key):
 
 def lines():
     return json.load(open(SPEC)) if os.path.exists(SPEC) else {}
-
-
-def band(f0):
-    if not f0:
-        return DEFAULT
-    for top, name, model, semis in BANDS:
-        if f0 < top:
-            return name, model, semis
 
 
 def wav_read(path, rate=HZ):
@@ -83,10 +105,10 @@ def piper(model, text, length):
     return x, v.config.sample_rate
 
 
-def say(text, f0, secs):
+def say(text, who, secs):
     """One phrase fitted to `secs`: float32 at HZ."""
     import librosa
-    _, model, semis = band(f0)
+    _, model, semis = band(who)
     f = 2 ** (semis / 12)
     length = 1.0 * f
     y = np.zeros(0, np.float32)
@@ -138,7 +160,7 @@ def build():
         if os.path.exists(p):
             continue
         d = spec[key]
-        x = say(v["text"], d.get("f0"), d["nframes"] / d["rate"])
+        x = say(v["text"], v["who"], d["nframes"] / d["rate"])
         wav_write(p, x)
         n += 1
     print(f"voices: {len(L)} spoken clips, {n} newly synthesised -> {CACHE}")
@@ -148,8 +170,11 @@ def build():
 
 def retail_clips(rom):
     """-> {key: (float32 at 16 kHz, facts)} for every non-looping clip of MIN_S or more."""
-    import librosa
+    import pickle
     from . import audio
+    cache = "D:/n64work/1080/work/retail_clips.pkl"          # dirty, dev only (decoding is slow)
+    if os.path.exists(cache):
+        return pickle.load(open(cache, "rb"))
     P = audio.parse(rom)
     B0, W0 = P["sec"]["bank"][0], P["sec"]["wave"][0]
     spec = audio.load_spec()["waves"]
@@ -164,6 +189,8 @@ def retail_clips(rom):
         raw = bytes(rom[W0 + w["base"]:W0 + w["base"] + (w["len"] // audio.FRAME[codec]) * audio.FRAME[codec]])
         pcm = audio.decode(raw, coefs, w["npred"], codec).astype(np.float32) / 32768
         out[key] = (pcm, d)
+    if os.path.isdir(os.path.dirname(cache)):
+        pickle.dump(out, open(cache, "wb"))
     return out
 
 
@@ -190,10 +217,16 @@ def transcribe(rom, dev="cuda", name="medium.en"):
         text = " ".join(s.text.strip() for s in segs).strip()
         v = None
         if len(re.sub(r"[^A-Za-z]", "", text)) >= 2:
-            v = out[key] = {"text": text, "who": band(d.get("f0"))[0], "secs": round(d["nframes"] / d["rate"], 2)}
+            v = out[key] = {"text": text, "secs": round(d["nframes"] / d["rate"], 2)}
         log.write(json.dumps([key, v]) + "\n")
         log.flush()
     log.close()
+    final = {}
+    for key, v in out.items():
+        t = tidy(key, v["text"])
+        if t:
+            final[key] = {"text": t, "who": track(key), "secs": v["secs"]}
+    out = final
     json.dump(out, open(SPEC, "w"), indent=0)
     print(f"transcribed: {len(out)} of {len(clips)} clips have words -> {SPEC}")
 
