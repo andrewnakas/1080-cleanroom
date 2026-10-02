@@ -71,6 +71,9 @@ def encode(key, d, img):
         return np.clip(img + 0.5, 0, 255).astype(np.uint8).tobytes(), None
     if f == "i8":
         return np.clip(img[..., 0] + 0.5, 0, 255).astype(np.uint8).tobytes(), None
+    if f == "i4":
+        a = np.clip(img[..., 0] / 17.0 + 0.5, 0, 15).astype(np.uint8).reshape(-1, 2)
+        return ((a[:, 0] << 4) | a[:, 1]).astype(np.uint8).tobytes(), None
     if f == "ci8":
         return enc_ci8(img)
     raise ValueError(f)
@@ -82,7 +85,7 @@ def render(key, d, scale, hooks):
         if img is not None:
             return np.asarray(img, np.float32)
     img = base_image(key, d, scale)
-    if d["fmt"] == "i8":
+    if d["fmt"] in ("i8", "i4"):
         # intensity pictures are their own coverage: the kept outline carries the shape
         if "alpha2" in d:
             lum = float(np.max(np.asarray(d["grid"], np.float32)[:, :3]))
@@ -177,7 +180,7 @@ def main(argv):
         from . import audio
         res = audio.regenerate(rom, audio.load_spec())
         fix_crc(rom)
-        line += f"; audio {res}"
+        line += f"; audio {res['samples']} samples, {res['seconds']} s ({'cached' if res['cached'] else 'synthesised'})"
     open(args[1], "wb").write(rom)
     diff = int((np.frombuffer(bytes(rom), np.uint8) != np.frombuffer(retail, np.uint8)).sum())
     print(line)

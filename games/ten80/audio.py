@@ -501,6 +501,10 @@ def regenerate(rom, spec, cache=CACHE, procs=PROCS):
             "bytes": {k: sum(n for _, n, kk in regions if kk == k) for k in ("wave", "book", "loop")}}
 
 
+def load_spec(path=SPEC):
+    return json.load(open(path))
+
+
 # ------------------------------------------------------------------ checks
 
 def _const_windows(a, n):

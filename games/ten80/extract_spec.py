@@ -30,6 +30,10 @@ def decode(rec, buf, pal=None):
     if f == "i8":
         a = np.frombuffer(b, np.uint8).reshape(h, w).astype(np.float32)
         return np.stack([a, a, a, a], -1)
+    if f == "i4":
+        a = np.frombuffer(b, np.uint8)
+        a = (np.stack([a >> 4, a & 15], 1).reshape(h, w) * 17).astype(np.float32)
+        return np.stack([a, a, a, a], -1)
     if f == "ci8":
         p = np.frombuffer(pal, ">u2")
         a = p[np.frombuffer(b, np.uint8)].reshape(h, w)
