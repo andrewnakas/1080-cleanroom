@@ -433,7 +433,10 @@ def _make(job):
                 f["f0"] = d["f0"] * 2 ** float(np.clip(np.log2(f["f0"] / d["f0"]) - round(np.log2(f["f0"] / d["f0"])), -0.5, 0.5))
             fr.append(f)
         desc = {"frames": fr}
-    x = descriptor.synthesize(desc, nf, d["rate"], seed=h32("1080", key))
+    from . import voices
+    x = voices.clip(key, d)             # spoken clips: placeholder TTS or the user's own take
+    if x is None:
+        x = descriptor.synthesize(desc, nf, d["rate"], seed=h32("1080", key))
     x = np.pad(np.asarray(x, np.float32)[:nf], (0, max(0, nf - len(x))))
     st, en, cnt = d["loop"]
     if cnt and en > st + 16:
@@ -452,7 +455,8 @@ def _make(job):
 
 
 def synth_all(spec, cache=CACHE, procs=PROCS):
-    key = zlib.crc32(json.dumps(spec["waves"], sort_keys=True).encode())
+    from . import voices
+    key = zlib.crc32(json.dumps([spec["waves"], voices.stamp()], sort_keys=True).encode())
     if cache and os.path.exists(cache):
         k, res = pickle.load(open(cache, "rb"))
         if k == key:

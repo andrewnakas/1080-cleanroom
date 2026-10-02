@@ -383,7 +383,24 @@ def decal(text, top, bottom=None, bg=(0, 0, 0, 255), style="b"):
     return fn
 
 
+def static(mark):
+    """TV static (our own noise) with a small green counter or a red level row."""
+    def fn(key, d):
+        w, h = d["w"], d["h"]
+        rng = np.random.default_rng(1080 + len(key) + w)
+        v = rng.uniform(0.25, 1.0, (h, w, 1)).astype(np.float32)
+        img = np.concatenate([v * (200, 215, 255), np.full((h, w, 1), 255, np.float32)], -1).astype(np.float32)
+        if mark == "count":
+            text_on(img, "1080", "c", (int(w * 0.66), int(h * 0.66), w - 2, h - 2), top=(30, 240, 40))
+        else:
+            for i in range(6):
+                img[2:5, 6 + i * 3:8 + i * 3, :3] = (240, 20, 20)
+        return img
+    return fn
+
+
 KEYED = {
+    "bootup@1958": static("count"), "bootup@2958": static("level"),
     "boarder1@3CB8": half_face("r", (0.5, 0.2), (60, 35, 20), (25, 15, 10), (150, 75, 75), 0.5, 0.71),
     "boarder2@1D50": half_face("l", (0.42, 0.37), (55, 35, 20), (25, 18, 12), (175, 95, 90), 0.6, 0.76),
     "boarder3@2320": half_face("r", (0.5, 0.34), (80, 50, 25), (70, 40, 20), (215, 90, 95), 0.56, 0.76,
