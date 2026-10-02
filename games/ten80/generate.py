@@ -23,6 +23,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RETAIL_SHA1 = "79cd1166c365e5809dec9b62e6d40d6032d5db3a"
 
 
+# (detail noise, quantisation dither) tried in turn until a Yay0 section fits its ROM slot
+LADDER = ((1.0, 1.0), (0.5, 1.0), (0.0, 1.0), (0.0, 0.6), (0.0, 0.35), (0.0, 0.0))
+
+
 def blur(a, k=1):
     """Small box blur (edge-replicated) on a 2-D float array."""
     for _ in range(k):
@@ -63,8 +67,34 @@ def enc_ci8(img):
     return np.asarray(q, np.uint8).tobytes(), pal16
 
 
-def encode(key, d, img):
+def dither(key, img, amp):
+    """Random-threshold quantisation (our own noise): smoother gradients, and flat areas never repeat a pattern."""
+    rng = np.random.default_rng(gen.h32("dither", key))
+    out = img.copy()
+    out[..., :3] += rng.uniform(-amp, amp, img[..., :3].shape).astype(np.float32)
+    return out
+
+
+BAYER = (np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]], np.float32) + 0.5) / 16 - 0.5
+
+
+def ordered(img, step=8.0):
+    """4x4 ordered dither (palette pictures: flat areas stay a regular, compressible pattern)."""
+    h, w = img.shape[:2]
+    t = np.tile(BAYER, (h // 4 + 1, w // 4 + 1))[:h, :w]
+    out = img.copy()
+    out[..., :3] += (t * step)[..., None]
+    return out
+
+
+def encode(key, d, img, amp=1.0):
     f = d["fmt"]
+    if f == "ci8":
+        img = ordered(img)
+    elif f == "rgba16" and amp:
+        img = dither(key, img, 4.0 * amp)
+    elif f == "rgba32" and amp:
+        img = dither(key, img, 1.0 * amp)
     if f == "rgba16":
         return enc_rgba16(img), None
     if f == "rgba32":
@@ -96,11 +126,11 @@ def render(key, d, scale, hooks):
     return img
 
 
-def write_file(payload, recs, spec, scale, hooks):
+def write_file(payload, recs, spec, scale, hooks, amp=1.0):
     for key in recs:
         d = spec[key]
         img = render(key, d, scale, hooks)
-        pix, pal = encode(key, d, img)
+        pix, pal = encode(key, d, img, amp)
         assert len(pix) == images.size(d), key
         payload[d["off"]:d["off"] + len(pix)] = pix
         if pal is not None:
@@ -118,9 +148,9 @@ def build(retail, spec, hooks=None, log=print):
     for (name, sec), keys in by_file.items():
         s = [x for x in secs[name] if x.type == (6 if sec == "data" else 12)][0]
         orig = romfs.payload(retail, s)
-        for scale in (1.0, 0.5, 0.25, 0.0):
+        for scale, amp in LADDER:
             payload = bytearray(orig)
-            write_file(payload, keys, spec, scale, hooks)
+            write_file(payload, keys, spec, scale, hooks, amp)
             if not s.yay0:
                 out = bytes(payload)
                 break
@@ -130,7 +160,7 @@ def build(retail, spec, hooks=None, log=print):
         else:
             raise SystemExit(f"{name}: regenerated data does not fit its slot ({len(out)} > {s.size})")
         if scale != 1.0:
-            stats["squeezed"].append(f"{name}:{scale}")
+            stats["squeezed"].append(f"{name.split('.')[0]}:{scale}/{amp}")
         rom[s.data_off:s.data_off + s.size] = out + bytes(s.size - len(out))
         stats["images"] += len(keys)
         stats["files"] += 1
