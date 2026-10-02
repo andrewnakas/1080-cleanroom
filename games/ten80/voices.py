@@ -171,16 +171,29 @@ def transcribe(rom, dev="cuda", name="medium.en"):
     import librosa
     from faster_whisper import WhisperModel
     model = WhisperModel(name, device=dev, compute_type="float16" if dev == "cuda" else "int8", cpu_threads=3)
-    out = {}
+    out, done = {}, set()
+    part = SPEC + ".partial"                 # resumable: one JSON line per clip already heard
+    if os.path.exists(part):
+        for ln in open(part):
+            k, v = json.loads(ln)
+            done.add(k)
+            if v:
+                out[k] = v
     clips = retail_clips(rom)
+    log = open(part, "a")
     for key, (pcm, d) in clips.items():
+        if key in done:
+            continue
         x = librosa.resample(pcm, orig_sr=d["rate"], target_sr=16000)
         segs, _ = model.transcribe(x, language="en", beam_size=5, condition_on_previous_text=False)
         segs = [s for s in segs if s.no_speech_prob < 0.6 and s.avg_logprob > -0.9]
         text = " ".join(s.text.strip() for s in segs).strip()
-        if len(re.sub(r"[^A-Za-z]", "", text)) < 2:
-            continue
-        out[key] = {"text": text, "who": band(d.get("f0"))[0], "secs": round(d["nframes"] / d["rate"], 2)}
+        v = None
+        if len(re.sub(r"[^A-Za-z]", "", text)) >= 2:
+            v = out[key] = {"text": text, "who": band(d.get("f0"))[0], "secs": round(d["nframes"] / d["rate"], 2)}
+        log.write(json.dumps([key, v]) + "\n")
+        log.flush()
+    log.close()
     json.dump(out, open(SPEC, "w"), indent=0)
     print(f"transcribed: {len(out)} of {len(clips)} clips have words -> {SPEC}")
 
