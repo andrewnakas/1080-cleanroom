@@ -346,10 +346,64 @@ for _n, _who in PORTRAIT.items():
     NAMED[_n] = portrait(_who)
 
 
+# ------------------------------------------------------------------ 3-D model textures (by spec key)
+
+def half_face(center, eye, iris, brow, lips, nose_y, mouth_y, shadow=None, patch=None):
+    """Half of a face (mirrored on the head model): the kept grid gives skin and hair, we paint the features.
+    center: 'l' or 'r' = which edge is the middle of the face.  Coordinates are for center='l'."""
+    def fx(x):
+        return x if center == "l" else 1 - x
+
+    def fn(key, d):
+        ex, ey = eye
+        dark = [int(c * 0.45) for c in lips]
+        ops = []
+        if patch:
+            ops.append({"e": [fx(ex), ey + 0.01, 0.26, 0.085], "c": list(patch), "rot": 20 if center == "l" else -20})
+        if shadow:
+            ops.append({"e": [fx(ex), ey - 0.02, 0.24, 0.05], "c": list(shadow)})
+        ops += [{"eye": {"c": [fx(ex), ey], "r": [0.19, 0.036], "iris": list(iris), "irisr": 0.5, "irisy": 1.9,
+                         "look": [-0.15 if center == "l" else 0.15, 0.0], "border": 0.16, "borderc": [35, 22, 18]}},
+                {"line": [[fx(ex - 0.22), ey - 0.062], [fx(ex + 0.05), ey - 0.075], [fx(ex + 0.26), ey - 0.055]], "w": 0.03,
+                 "c": list(brow)},
+                {"e": [fx(0.1), nose_y, 0.05, 0.012], "c": dark},
+                {"line": [[fx(0.2), ey + 0.05], [fx(0.24), nose_y - 0.02], [fx(0.2), nose_y + 0.005]], "w": 0.02, "c": dark},
+                {"e": [fx(0.0), mouth_y, 0.3, 0.036], "c": list(lips)},
+                {"line": [[fx(0.0), mouth_y], [fx(0.3), mouth_y - 0.006]], "w": 0.012, "c": dark}]
+        return facepaint.render({"base": "grid", "detail": 0.04, "ops": ops}, d["w"], d["h"], grid=d["grid"],
+                                seed=hash(key) & 0xFFFF)
+    return fn
+
+
+def decal(text, top, bottom=None, bg=(0, 0, 0, 255), style="b"):
+    def fn(key, d):
+        img = np.zeros((d["h"], d["w"], 4), np.float32)
+        img[:] = bg
+        return text_on(img, text, style, (3, 4, d["w"] - 3, d["h"] - 4), top=top, bottom=bottom)
+    return fn
+
+
+KEYED = {
+    "boarder1@3CB8": half_face("r", (0.5, 0.2), (60, 35, 20), (25, 15, 10), (150, 75, 75), 0.5, 0.71),
+    "boarder2@1D50": half_face("l", (0.42, 0.37), (55, 35, 20), (25, 18, 12), (175, 95, 90), 0.6, 0.76),
+    "boarder3@2320": half_face("r", (0.5, 0.34), (80, 50, 25), (70, 40, 20), (215, 90, 95), 0.56, 0.76,
+                               shadow=(120, 150, 90)),
+    "boarder4@5510": half_face("l", (0.42, 0.29), (60, 110, 200), (190, 160, 70), (205, 110, 110), 0.5, 0.72),
+    "boarder5@4808": half_face("l", (0.46, 0.38), (70, 120, 190), (150, 125, 80), (190, 110, 105), 0.6, 0.73),
+    "boarder5@6D08": half_face("r", (0.3, 0.6), (40, 90, 220), (20, 20, 20), (20, 20, 20), 0.5, 0.78, patch=(15, 15, 18)),
+    "boarder1@22A0": decal("1080", (255, 240, 40), (230, 190, 0)),
+    "boarder4@6D20": decal("1080", (240, 40, 30), (180, 10, 10)),
+    "checkpoint@488": over_grid("CHECK", style="c", box=(0.08, 0.15, 0.92, 0.85)),
+}
+
+
 def hooks(spec):
     out = {}
     for key, d in spec.items():
         n = d.get("name")
         if n in NAMED and d["fmt"] != "i8":
             out[key] = NAMED[n]
+    for key, fn in KEYED.items():
+        assert key in spec, key
+        out[key] = fn
     return out
